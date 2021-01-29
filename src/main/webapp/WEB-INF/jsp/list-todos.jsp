@@ -6,10 +6,9 @@
 
 <body>
 
-<h1>Here are the list of your todos!</h1>
-<li>
-	<ul>${todos}</ul>
-</li>
+<h1>Your name is ${name}, here are the list of your todos!</h1>
+${todos}
+<a href="/add-todo">Add a todo</a>
 
 </body>
 

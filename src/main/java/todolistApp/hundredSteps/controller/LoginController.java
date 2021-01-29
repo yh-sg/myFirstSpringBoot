@@ -6,10 +6,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import todolistApp.hundredSteps.service.LoginService;
 
 @Controller
+@SessionAttributes("name") //takes from model name and put it in, persist at multiple request
 public class LoginController {
 	
 	@Autowired
