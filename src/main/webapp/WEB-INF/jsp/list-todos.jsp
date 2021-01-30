@@ -4,7 +4,7 @@
 
 	<div class="container">
 
-<h1>${name}, here are the list of your todos!</h1>
+<h1>Here are the list of your todos!</h1>
 
 <table class="table table-striped">
 	<caption>Your todos are:</caption>
