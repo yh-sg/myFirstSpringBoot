@@ -2,14 +2,18 @@ package todolistApp.hundredSteps.controller;
 
 import java.util.Date;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import todolistApp.hundreadSteps.model.Todo;
 import todolistApp.hundredSteps.service.TodoService;
 
 @Controller
@@ -28,12 +32,19 @@ public class TodoController {
 	
 	@RequestMapping(value="/add-todo", method = RequestMethod.GET)
 	public String showAddToDo(ModelMap model) {
+		//this will map into modelattr in jsp, , Bean->Form
+		model.addAttribute("todo",new Todo(0, (String) model.get("name"),"Default Desc", new Date(), false));
 		return "add-todo";
 	}
 	
 	@RequestMapping(value="/add-todo", method = RequestMethod.POST)
-	public String addToDo(ModelMap model, @RequestParam String desc) {
-		service.addTodo((String) model.get("name"), desc, new Date(), false);
+	public String addToDo(ModelMap model, @Valid Todo todo, BindingResult result) {
+		//form packing object(directly map from todo object) -> Command Bean | Implementing Server Side Validation
+		//form -> bean
+		if(result.hasErrors()) {
+			return "add-todo";
+		}
+		service.addTodo((String) model.get("name"), todo.getDesc(), new Date(), false);
 		return "redirect:/list-todos";
 	}
 	
