@@ -36,6 +36,22 @@ public class TodoService {
             boolean isDone) {
         todos.add(new Todo(++todoCount, name, desc, targetDate, isDone));
     }
+    
+    public Todo retrieveTodos(int id) {
+        for (Todo todo : todos) {
+            if (todo.getId()==id) {
+            	return todo;
+            }
+        }
+        return null;
+    }
+    
+    
+    public void updateTodo(Todo todo) {
+    	//Todo equals methods compare based on id
+    	todos.remove(todo);
+    	todos.add(todo);
+    	}
 
     public void deleteTodo(int id) {
         Iterator<Todo> iterator = todos.iterator();

@@ -13,6 +13,7 @@
 <h1>Add-to-do-page</h1>
 
 <form:form method="post" modelAttribute="todo">
+	<form:hidden path="id"/>
 	<fieldset class="form-group">
 		<form:label path="desc">Description:</form:label>
 		<form:input path="desc" type="text" name="desc" class="form-control" required="required"/>
