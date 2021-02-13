@@ -44,7 +44,8 @@ public class TodoController {
 	@RequestMapping(value="/list-todos", method = RequestMethod.GET)
 	public String showTodo(ModelMap model) {
 		String name = getLoggedInUserName(model);
-		model.put("todos", service.retrieveTodos(name));
+		model.put("todos", repository.findByUser(name));
+//		model.put("todos", service.retrieveTodos(name));
 		return "list-todos";
 	}
 
@@ -92,7 +93,8 @@ public class TodoController {
 			return "add-todo";
 		}
 		todo.setUser(getLoggedInUserName(model));
-		service.updateTodo(todo);
+		repository.save(todo);
+//		service.updateTodo(todo);
 		
 		return "redirect:/list-todos";
 	}
@@ -100,10 +102,10 @@ public class TodoController {
 	@RequestMapping(value="/delete-todo", method = RequestMethod.GET)
 	public String deleteToDo(@RequestParam int id) {
 		
-		if(id==1)
-			throw new RuntimeException("Something went wrong");
-		
-		service.deleteTodo(id);
+//		if(id==1)
+//			throw new RuntimeException("Something went wrong!!");
+		repository.deleteById(id);
+//		service.deleteTodo(id);
 		return "redirect:/list-todos";
 	}
 }
