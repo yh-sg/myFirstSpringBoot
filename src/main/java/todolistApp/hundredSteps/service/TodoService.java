@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import todolistApp.hundreadSteps.model.Todo;
+import todolistApp.hundredSteps.model.Todo;
 
 @Service
 public class TodoService {

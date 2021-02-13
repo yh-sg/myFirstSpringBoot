@@ -19,7 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import todolistApp.hundreadSteps.model.Todo;
+import todolistApp.hundredSteps.model.Todo;
+import todolistApp.hundredSteps.service.TodoRepository;
 import todolistApp.hundredSteps.service.TodoService;
 
 @Controller
@@ -28,6 +29,9 @@ public class TodoController {
 
 	@Autowired
 	TodoService service;
+	
+	@Autowired
+	TodoRepository repository;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -69,7 +73,9 @@ public class TodoController {
 		if(result.hasErrors()) {
 			return "add-todo";
 		}
-		service.addTodo(getLoggedInUserName(model), todo.getDesc(), todo.getTargetDate(), false);
+		todo.setUser(getLoggedInUserName(model));
+		repository.save(todo);
+		//service.addTodo(getLoggedInUserName(model), todo.getDesc(), todo.getTargetDate(), false);
 		return "redirect:/list-todos";
 	}
 	
